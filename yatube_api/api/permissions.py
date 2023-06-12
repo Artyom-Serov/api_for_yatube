@@ -12,6 +12,5 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         """
         Проверка наличия прав доступа к указанному объекту.
         """
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.author == request.user
+        return (request.method in permissions.SAFE_METHODS
+                or obj.author == request.user)
